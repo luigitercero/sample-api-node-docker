@@ -25,6 +25,16 @@ docker run -it -v ~/Documents/APIREST:/App --name api-node -p 3000:3000 node bas
 ```
 ahora podemos trabajar desde nuestro ide favorito
 
+
+### ver la ip de un container
+
+```
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' ${CID}
+```
+### matar un contariner
+  ```
+  docker kill <nombredelcontainer>
+  ```
 4) una vez que nos encontremos en el contenedor podemos inicializar nuestro proyecto
 
 ```bash
@@ -137,15 +147,7 @@ docker build -t mi-primera-api .
 docker run -d -p 3000:3001 --name mi-api --rm -e PORT=3001 -e IP="192.18.35.1" mi-primera-api 
 ```
 nos dirigimos nuestro navegador y localhost:3000
-5) ver la ip de un container
 
-```
-docker inspect --format '{{ .NetworkSettings.IPAddress }}' ${CID}
-```
-## matar un contariner
-  ```
-  docker kill <nombredelcontainer>
-  ```
 # Crear una Imagen a partir de un contenedor (no recomendado)
 
 al crear nuestro entorno de desarrollo podemos matar contenedores 
