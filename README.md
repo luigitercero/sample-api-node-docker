@@ -16,6 +16,8 @@ docker run -it  -v <carpetaDeAPI>:<cualquierCarpetaDocker> --name<nombreParaIden
 - **-v** crear un carpeta compartida
 - **-p** mapear puerto
 - **-it** agregar un script de consola al iniciar el contenedor
+- **-e** agregar variable de entorno
+- **--rm** borrar el contenedor despues de matarlo
 ***ejemplo*** 
 
 ```bash
@@ -67,7 +69,7 @@ const port =  process.env.IP || 3000
 bodyParser = require('body-parser').json();
 
 app.get('/', function (req, res) {
-  res.send('Hello World')
+  res.send('Hello World' )
 })
 
 app.get('/par',bodyParser, function (req, res) {
@@ -89,3 +91,49 @@ con esto podemos entrar a nuestro navegador y dirigirnos a localhost:3000
   "test": "yay"
 }
 ```
+# Crear un contenedor 
+
+1) para crear un contenedor simple necesitamos crear un archivo docker file que contiene lo siguiente
+
+```dockerfile
+FROM node
+WORKDIR /app
+ADD . /app
+RUN npm install
+ENV PORT=3000
+ENV IP="192.168.0.0"
+CMD ["node","index.js"]
+```
+
+2) una vez creado esto modificamos el archivo index.js
+
+```js
+const express = require('express')
+const app = express()
+const ip = process.env.IP || "0.0.0.0"
+const port =  process.env.PORT || 3000
+
+bodyParser = require('body-parser').json();
+app.get('/', function (req, res) {
+  res.send(`kas variable de entorno son port: ${port} y ip ${ip}`)
+})
+app.get('/par',bodyParser, function (req, res) {
+  res.send(req.body);
+  console.log(req.body);
+})
+app.listen(port)
+
+console.log(`se escucha en el puerto ${port}`);
+```
+3) al estar preparados podemos crear nuestra primera imagen para un contenedor 
+
+```bash
+docker build -t mi-primera-api .
+```
+
+4) la ejecutamos en la terminal
+
+```bash
+docker run -d -p 3000:3001 --name mi-api --rm -e port=3001 -e IP="192.18.35.1" mi-primera-api 
+```
+nos dirigimos nuestro navegador y localhost:3000
