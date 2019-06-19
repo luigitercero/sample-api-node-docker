@@ -134,11 +134,18 @@ docker build -t mi-primera-api .
 4) la ejecutamos en la terminal
 
 ```bash
-docker run -d -p 3000:3001 --name mi-api --rm -e port=3001 -e IP="192.18.35.1" mi-primera-api 
+docker run -d -p 3000:3001 --name mi-api --rm -e PORT=3001 -e IP="192.18.35.1" mi-primera-api 
 ```
 nos dirigimos nuestro navegador y localhost:3000
+5) ver la ip de un container
 
-
+```
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' ${CID}
+```
+## matar un contariner
+  ```
+  docker kill <nombredelcontainer>
+  ```
 # Crear una Imagen a partir de un contenedor (no recomendado)
 
 al crear nuestro entorno de desarrollo podemos matar contenedores 
