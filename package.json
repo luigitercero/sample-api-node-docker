@@ -1,0 +1,15 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "1) para empezar debemos construir un contenedor con lo necesario para trabajar. 2) debemos crear un ambiente de desarrollo en docker con nodejs ``` docker pull node ``` 3) para poder trabajar con el contenedor en un ambiente de desarrollo podemos utilizar el comando -v para poder compartir carpetas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
