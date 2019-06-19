@@ -91,7 +91,7 @@ con esto podemos entrar a nuestro navegador y dirigirnos a localhost:3000
   "test": "yay"
 }
 ```
-# Crear un contenedor 
+# Crear una Imagen a partir de un dockerfile
 
 1) para crear un contenedor simple necesitamos crear un archivo docker file que contiene lo siguiente
 
@@ -137,3 +137,32 @@ docker build -t mi-primera-api .
 docker run -d -p 3000:3001 --name mi-api --rm -e port=3001 -e IP="192.18.35.1" mi-primera-api 
 ```
 nos dirigimos nuestro navegador y localhost:3000
+
+
+# Crear una Imagen a partir de un contenedor (no recomendado)
+
+al crear nuestro entorno de desarrollo podemos matar contenedores 
+
+```bash
+docker kill <NAMEContainer>
+```
+al matarlo y no usar la bander --rm podemos ver que el contenedor sigue existiendo con
+
+```bash
+docker ps -a
+```
+podemos observar que nos muestra una serie de columnas, lo unico que debemos hacer es 
+
+```bash
+docker commit <columnaNames> <nombreDeLAnuevaImangen>
+docker commit mi-api holagg
+```
+
+```bash
+docker images
+```
+y podemos ver la nueva imagen holagg con todo el desarrollo que agregamos 
+
+
+
+
