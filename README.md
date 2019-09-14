@@ -75,7 +75,7 @@ npm i express
 const express = require('express')
 const app = express()
 const ip = process.env.IP || "0.0.0.0"
-const port =  process.env.IP || 3000
+const port =  process.env.PORT || 3000
 bodyParser = require('body-parser').json();
 
 app.get('/', function (req, res) {
